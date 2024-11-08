@@ -2,20 +2,20 @@ import json
 from people.models import Person
 from enum import Enum, unique
 
-def create_person(serialized_person):
-    person = json.loads(serialized_person)
+def create_person(person_json):
+    person = deserialize_person(person_json)
     print("person:" + str(person))
-    if person['age'] < 18:
+    if person.age < 18:
         return Status.NO_SUCCESS
-    Person.objects.create(person)
+    person.save()
+    return Status.SUCCESS
 
-
-
-def deserialize_person(serialized_person):
-    pass 
-
-
-
+def deserialize_person(person_json):
+    person_dict = json.loads(person_json)
+    name = person_dict['name']
+    age = person_dict['age']
+    person = Person(name = name, age = age)
+    return person
 
 @unique
 class Status(Enum):
