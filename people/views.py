@@ -22,5 +22,5 @@ def create(request):
 
 def to_HttpResponse(response):
     if response.status == Status.SUCCESS:
-        return HttpResponse(status=200)
+        return HttpResponse(status=201)
     return HttpResponse(status=400, content=response.message)

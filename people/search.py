@@ -7,7 +7,6 @@ def search_person(name, age):
         persons = Person.objects.all()
     else:
         if name is not None:
-            print("name: " + name)
             persons = Person.objects.filter(name__icontains = name)
             if age is not None:
                 persons = persons.filter(age = age)

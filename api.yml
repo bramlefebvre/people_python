@@ -1,0 +1,62 @@
+openapi: 3.0.0
+info:
+  title: Person API
+  version: 0.0.1
+servers:
+  - url: http://localhost:8000
+    description: Development server
+
+paths:
+  /people/search:
+    get:
+      parameters:
+        - name: name
+          description: Search for a Person whose name contains this name.
+          in: query
+          schema: 
+            type: string
+        - name: age
+          description: Search for a person whose age equals this age.
+          in: query
+          schema:
+            type: integer 
+      summary: Get a list of Persons
+      description: Retrieves a list of the Persons filtered on name and age
+      responses:
+        '200':
+          description: A JSON array of Person objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+        '500':
+          description: Server error
+  /people/create:
+    post:
+      summary: Create a new person
+      description: Adds a new Person to the system.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+      responses:
+        '201':
+          description: Person created successfully
+        '400':
+          description: Bad request
+
+components:
+  schemas:
+    Person:
+      type: object
+      properties:
+        name:
+          type: string
+          example: 'John'
+        age:
+          type: integer
+          example: 30

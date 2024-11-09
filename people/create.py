@@ -10,12 +10,12 @@ def create_person(person_json):
     person = deserialize_person(person_json)
     print("person:" + str(person))
     if person.age < 18:
-        return Response(Status.NO_SUCCESS, "age must be 18 or higher")
+        return Response(Status.NO_SUCCESS, "age_must_be_18_or_higher")
     try:
         person.save()
     except utils.IntegrityError as e:
         logging.debug(traceback.format_exc())
-        return Response(Status.NO_SUCCESS, "name already exists")
+        return Response(Status.NO_SUCCESS, "name_already_exists")
     return Response(Status.SUCCESS, "success")
 
 def deserialize_person(person_json):
