@@ -36,7 +36,7 @@ paths:
   /people/create:
     post:
       summary: Create a new person
-      description: Adds a new Person to the system.
+      description: Adds a new Person to the system. If a Person with the name in this request's body is already present in the system the new Person will not be created. The age of the Person must also be 18 or higher.
       requestBody:
         required: true
         content:
