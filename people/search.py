@@ -1,5 +1,4 @@
 from people.models import Person
-import json
 
 
 def search_person(name, age):
@@ -13,8 +12,7 @@ def search_person(name, age):
         else:
             persons = Person.objects.filter(age = age)
     serialized_persons = serialize_persons(persons)
-    persons_json = json.dumps(serialized_persons)
-    return persons_json
+    return serialized_persons
 
 
 

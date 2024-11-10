@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from people.search import search_person
 from people.create import Status, create_person
 from django.views.decorators.csrf import csrf_exempt
-# import json
+import json
 
 
 # Create your views here.
@@ -12,15 +12,23 @@ from django.views.decorators.csrf import csrf_exempt
 def search(request):
     name = request.GET.get("name")
     age = request.GET.get("age")
-    persons_json = search_person(name, age)
+    serialized_persons = search_person(name, age)
+    persons_json = json.dumps(serialized_persons)
     return HttpResponse(persons_json)
+
+
 
 @csrf_exempt
 def create(request):
-    response = create_person(request.body)
+    person = json.loads(request.body)
+    response = create_person(person)
     return to_HttpResponse(response)
 
 def to_HttpResponse(response):
     if response.status == Status.SUCCESS:
         return HttpResponse(status=201)
-    return HttpResponse(status=400, content=response.message)
+    body = {
+        'message_code': response.message_code
+    }
+    body = json.dumps(body)
+    return HttpResponse(status=400, content=body)

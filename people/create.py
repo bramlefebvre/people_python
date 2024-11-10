@@ -1,14 +1,12 @@
 from dataclasses import dataclass
-import json
 from people.models import Person
 from enum import Enum, unique
 from django.db import utils
 import logging
 import traceback
 
-def create_person(person_json):
-    person = deserialize_person(person_json)
-    print("person:" + str(person))
+def create_person(person_dict):
+    person = deserialize_person(person_dict)
     if person.age < 18:
         return Response(Status.NO_SUCCESS, "age_must_be_18_or_higher")
     try:
@@ -18,8 +16,7 @@ def create_person(person_json):
         return Response(Status.NO_SUCCESS, "name_already_exists")
     return Response(Status.SUCCESS, "success")
 
-def deserialize_person(person_json):
-    person_dict = json.loads(person_json)
+def deserialize_person(person_dict):
     name = person_dict['name']
     age = person_dict['age']
     person = Person(name = name, age = age)
@@ -33,6 +30,6 @@ class Status(Enum):
 @dataclass(frozen=True)
 class Response:
     status: Status
-    message: str
+    message_code: str
 
 
