@@ -10,6 +10,8 @@ import json
 
 
 def search(request):
+    if request.method != "GET":
+        return HttpResponse(status = 404)
     name = request.GET.get("name")
     age = request.GET.get("age")
     serialized_persons = search_person(name, age)
@@ -20,6 +22,8 @@ def search(request):
 
 @csrf_exempt
 def create(request):
+    if request.method != "POST":
+        return HttpResponse(status = 404)
     person = json.loads(request.body)
     response = create_person(person)
     return to_HttpResponse(response)
