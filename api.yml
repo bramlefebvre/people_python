@@ -48,6 +48,14 @@ paths:
           description: Person created successfully
         '400':
           description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message_code:
+                    type: string
+                    example: 'name_already_exists'
 
 components:
   schemas:
