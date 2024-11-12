@@ -29,10 +29,15 @@ If the name is already present or the age is below 18 the person will not be cre
 
 - Make sure you have Python installed
 - Go to the terminal and navigate to this folder
-- Execute: "py -m venv .venv"
-- Execute: "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process"
-- Execute: ".venv\scripts\activate"
-- Execute "py -m pip install django"
+- Create a virtual environment. Execute: "py -m venv .venv"
+- Set permission for activate script. Execute: "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process"
+- Activate the virtual environment. Execute: ".venv\scripts\activate"
+- Install Django in the virtual environment. Execute "py -m pip install django"
 - To get the development server running: "py manage.py runserver"
 - The server runs at http://localhost:8000
 - You can use Postman to do calls 
+- In order to clear the test database:
+-- To get in the shell: "py manage.py shell", then in the shell execute
+-- from people.models import Person
+-- Person.objects.all().delete()
+
