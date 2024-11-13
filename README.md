@@ -38,8 +38,6 @@ If the name is already present or the age is below 18 the person will not be cre
 - To get the development server running: "py manage.py runserver"
 - The server runs at http://localhost:8000
 - You can use Postman to do calls 
-- In order to clear the test database:
--- To get in the shell: "py manage.py shell", then in the shell execute
--- from people.models import Person
--- Person.objects.all().delete()
+- In order to clear the test database. To get in the shell: "py manage.py shell", then in the shell execute
+`from people.models import Person` and then `Person.objects.all().delete()`
 
