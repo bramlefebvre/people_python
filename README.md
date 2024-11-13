@@ -5,6 +5,7 @@ Api docs in api.yml.
 
 ### Search
 GET /people/search
+
 Query parameters name (string) and age (int). Returns all Persons filtered in the following way. If name is given it filters so that only Persons whose name contains the name field are retained. If age is given it filters so that only Persons with that age are retained. If both name and age are given both filters are applied. Name is case insensitive. Returns the Persons in a JSON array e.g.
 `
 [{
@@ -14,6 +15,7 @@ Query parameters name (string) and age (int). Returns all Persons filtered in th
 `
 ### Create
 POST /people/create
+
 Expects a json containing data of a person e.g.
 `
 {
